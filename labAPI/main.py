@@ -5,9 +5,15 @@ app = FastAPI()
 
 @app.get("/api/v1.0/predict")
 def predict(
-    num1: Optional[float] = Query(default=0.0),
-    num2: Optional[float] = Query(default=0.0)
+    num1: Optional[float] = Query(default=None),
+    num2: Optional[float] = Query(default=None)
 ):
+    # Jeśli numery nie zostały podane lub są None, ustaw domyślnie 0.0:
+    if num1 is None:
+        num1 = 0.0
+    if num2 is None:
+        num2 = 0.0
+        
     total = num1 + num2
     prediction = 1 if total > 5.8 else 0
     return {
